@@ -2,7 +2,7 @@
 **/bin/
 bin-int/
 
-# Hazel files
+# NurtEngine files
 *.log
 
 # Visual Studio files and folder
@@ -13,6 +13,6 @@ bin-int/
 **.vcxproj.user
 
 # Directories
-Hazel/vendor/VulkanSDK
-Hazelnut/assets/cache
+NurtEngine/vendor/VulkanSDK
+NurtEngine/assets/cache
 scripts/__pycache__
