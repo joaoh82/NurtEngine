@@ -1,0 +1,3 @@
+[submodule "NurtEngine/vendor/spdlog"]
+	path = NurtEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
