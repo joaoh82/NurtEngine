@@ -39,42 +39,53 @@ namespace NurtEngine {
 
 	#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
+	// Event is base class for all events
 	class NURTENGINE_API Event
 	{
 		friend class EventDispatcher;
 
 	public:
 
+		// Pure functions
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
+		// ToString is a debugging function and can be overidden in any way we like
 		virtual std::string ToString() const { return GetName(); }
 
+		// IsInCategory is an easy way to filter out the events
+		// If returns 0 is not in the category
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}
 
 	protected:
-
+		// This is an easy flag for us to know if the event was already handled
 		bool m_Handled = false;
 	};
 
+	// EventDispatcher is a way for us to dispatch event based on their type
 	class EventDispatcher
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
 
 	public:
-
+		
+		// We create an instance of dispatcher with the event to be propagated
 		EventDispatcher(Event& event)
 			: m_Event(event)
 		{
 		}
 
+		// After constructed we can call this Dispatch function a number of times with the event
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
+			// The event is only propagated is the event being sent 
+			// is of the same type of the event in the constructor
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
 				m_Event.m_Handled = func(*(T*)&m_Event);

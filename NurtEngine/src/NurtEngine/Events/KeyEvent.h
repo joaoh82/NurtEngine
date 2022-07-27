@@ -6,6 +6,9 @@
 
 namespace NurtEngine {
 
+	// KeyEvent is a base class for Key events that basically just
+	// returns the keycode. Any other key event like pressed and released are 
+	// derived from this one.
 	class NURTENGINE_API KeyEvent : public Event
 	{
 	public:
@@ -25,6 +28,8 @@ namespace NurtEngine {
 		KeyPressedEvent(int keycode, int repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
+		// When you press and hold a key the operating systems sends one key press event
+		// and than sends several key repeat events.
 		inline int GetRepeatCount() const { return m_RepeatCount; }
 
 		std::string ToString() const override
