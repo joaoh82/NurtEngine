@@ -18,6 +18,9 @@ project "NurtEngine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "nepch.h"
+	pchsource "NurtEngine/src/nepch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

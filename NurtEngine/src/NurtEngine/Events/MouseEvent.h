@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace NurtEngine {
 
 	class NURTENGINE_API MouseMovedEvent : public Event

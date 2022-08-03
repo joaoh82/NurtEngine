@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace NurtEngine {
 
 	// KeyEvent is a base class for Key events that basically just

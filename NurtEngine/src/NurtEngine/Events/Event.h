@@ -2,9 +2,6 @@
 
 #include "NurtEngine/Core.h"
 
-#include <string>
-#include <functional>
-
 namespace NurtEngine {
 
 	// Events in NurtEngine are currently blocking, meaning when an event occurs it
@@ -51,7 +48,7 @@ namespace NurtEngine {
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
-		// ToString is a debugging function and can be overidden in any way we like
+		// ToString is a debugging function and can be overridden in any way we like
 		virtual std::string ToString() const { return GetName(); }
 
 		// IsInCategory is an easy way to filter out the events
