@@ -10,6 +10,12 @@ workspace "NurtEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "NurtEngine/vendor/GLFW/include"
+
+include "NurtEngine/vendor/GLFW"
+
 project "NurtEngine"
 	location "NurtEngine"
 	kind "SharedLib"
@@ -30,12 +36,19 @@ project "NurtEngine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 		systemversion "latest"
 
 		defines
@@ -50,15 +63,15 @@ project "NurtEngine"
 		}
 
 	filter "configurations:Debug"
-		defines "HZ_DEBUG"
+		defines "NE_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "HZ_RELEASE"
+		defines "NE_RELEASE"
 		symbols "On"
 
 	filter "configurations:Debug"
-		defines "HZ_DIST"
+		defines "NE_DIST"
 		symbols "On"
 		
 project "Sandbox"
@@ -97,13 +110,13 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		defines "HZ_DEBUG"
+		defines "NE_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "HZ_RELEASE"
+		defines "NE_RELEASE"
 		symbols "On"
 
 	filter "configurations:Debug"
-		defines "HZ_DIST"
+		defines "NE_DIST"
 		symbols "On"

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "nepch.h"
 #include "NurtEngine/Core.h"
 
 namespace NurtEngine {

@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "NurtEngine/Log.h"
+
 #ifdef NE_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif // NE_PLATFORM_WINDOWS
