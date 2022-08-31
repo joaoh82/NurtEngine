@@ -3,6 +3,7 @@
 // For use by Nurt Engine Applications
 
 #include "NurtEngine/Application.h"
+#include "NurtEngine/Layer.h"
 #include "NurtEngine/Log.h"
 
 // ----------Entry Point--------------

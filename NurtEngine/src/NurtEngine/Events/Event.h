@@ -40,9 +40,10 @@ namespace NurtEngine {
 	// Event is base class for all events
 	class NURTENGINE_API Event
 	{
-		friend class EventDispatcher;
 
 	public:
+
+		bool Handled = false;
 
 		// Pure functions
 
@@ -58,10 +59,6 @@ namespace NurtEngine {
 		{
 			return GetCategoryFlags() & category;
 		}
-
-	protected:
-		// This is an easy flag for us to know if the event was already handled
-		bool m_Handled = false;
 	};
 
 	// EventDispatcher is a way for us to dispatch event based on their type
@@ -86,7 +83,7 @@ namespace NurtEngine {
 			// is of the same type of the event in the constructor
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;

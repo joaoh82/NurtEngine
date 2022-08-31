@@ -20,12 +20,29 @@ namespace NurtEngine {
 
 	}
 
+	// Pushing Layer into the LayerStack
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	// Pushing OverLay into the LayerStack
+	void Application::PushOverlay(Layer* layer)
+	{
+		m_LayerStack.PushOverlay(layer);
+	}
+
 	void Application::Run()
 	{
 		while (m_Running)
 		{
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			// Iterates over all Layers and OverLays
+			for (Layer* layer : m_LayerStack) // We can use this because we implemented Begin() and End()
+				layer->OnUpdate();
+
 			m_Window->OnUpdate();
 		}
 	}
@@ -37,7 +54,15 @@ namespace NurtEngine {
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
 		// Logging events for debugging purposes
-		NE_CORE_TRACE("{0}", e);
+		//NE_CORE_TRACE("{0}", e);
+
+		// Iterating backwards through the LayerStack and calling ObEvent on every layer
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+		{
+			(*--it)->OnEvent(e);
+			if (e.Handled) // If Event was Handled by Layer or OverLay (which come first) we break out of the for loop.
+				break;
+		}
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)
