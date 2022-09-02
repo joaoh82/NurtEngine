@@ -13,8 +13,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "NurtEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "NurtEngine/vendor/Glad/include"
 
 include "NurtEngine/vendor/GLFW"
+include "NurtEngine/vendor/Glad"
 
 project "NurtEngine"
 	location "NurtEngine"
@@ -37,13 +39,15 @@ project "NurtEngine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
 	}
 
 	links 
 	{ 
 		"GLFW",
-		"opengl32.lib"
+		"Glad",
+		"opengl32.lib",
 	}
 
 	filter "system:windows"
@@ -54,7 +58,8 @@ project "NurtEngine"
 		defines
 		{
 			"NE_PLATFORM_WINDOWS",
-			"NE_BUILD_DLL"
+			"NE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
