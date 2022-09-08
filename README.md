@@ -10,7 +10,7 @@ Nurt Engine is an interactive application and rendering engine for Windows. Bein
 This game engine is being built for educational purposes in order to gain a better understading of how a Game Engine really works. Initially I am basing the development on third party sources like books and other professionals from the industry, but my goal is that at some point after all the studying and researching of related topics I'll gain enough understanding of the subject that I'll start to make this engine my own.
 
 ## Screeshoot
-![Nurt Engine Dispatching Events](/docs/FirstWindowEvents.png?raw=true "Nurt Engine Window Dispatching Events")
+![Nurt Engine ImGui Implemented](/docs/ImGuiImplemented.png?raw=true "Nurt Engine ImGui Implemented")
 
 ## High Level Window Event System
 ![High Level Window Event System](/docs/WindowEventSystem.png?raw=true "High Level Window Event System")
