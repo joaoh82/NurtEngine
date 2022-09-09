@@ -20,6 +20,8 @@ include "NurtEngine/vendor/GLFW"
 include "NurtEngine/vendor/Glad"
 include "NurtEngine/vendor/imgui"
 
+startproject "Sandbox"
+
 project "NurtEngine"
 	location "NurtEngine"
 	kind "SharedLib"
