@@ -10,6 +10,10 @@
 	#error NurtEngine only support Windows for now!
 #endif
 
+#ifdef NE_DEBUG
+	#define NE_ENABLE_ASSERTS
+#endif
+
 #ifdef NE_ENABLE_ASSERTS
 #define NE_ASSERT(x, ...) { if(!(x)) { NE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #define NE_CORE_ASSERT(x, ...) { if(!(x)) { NE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }

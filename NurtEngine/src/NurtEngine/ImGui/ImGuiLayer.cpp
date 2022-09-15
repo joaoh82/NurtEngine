@@ -107,6 +107,7 @@ namespace NurtEngine {
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[e.GetMouseButton()] = true;
 
+		// The reason we return false is because we do not want to handle this on this layer
 		return false;
 	}
 

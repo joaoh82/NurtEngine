@@ -7,6 +7,7 @@ workspace "NurtEngine"
 		"Release",
 		"Dist"
 	}
+	startproject "Sandbox"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -16,16 +17,18 @@ IncludeDir["GLFW"] = "NurtEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "NurtEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "NurtEngine/vendor/imgui"
 
-include "NurtEngine/vendor/GLFW"
-include "NurtEngine/vendor/Glad"
-include "NurtEngine/vendor/imgui"
+group "Dependencies"
+	include "NurtEngine/vendor/GLFW"
+	include "NurtEngine/vendor/Glad"
+	include "NurtEngine/vendor/imgui"
 
-startproject "Sandbox"
+group ""
 
 project "NurtEngine"
 	location "NurtEngine"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -70,28 +73,29 @@ project "NurtEngine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox\"")
 		}
 
 	filter "configurations:Debug"
 		defines "NE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "NE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 
 	filter "configurations:Debug"
 		defines "NE_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 		
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -125,15 +129,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "NE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "NE_RELEASE"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		optimize "On"
 
-	filter "configurations:Debug"
+	filter "configurations:Dist"
 		defines "NE_DIST"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		optimize "On"
