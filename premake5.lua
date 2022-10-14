@@ -22,8 +22,6 @@ group "Dependencies"
 	include "NurtEngine/vendor/Glad"
 	include "NurtEngine/vendor/imgui"
 
-group ""
-
 project "NurtEngine"
 	location "NurtEngine"
 	kind "SharedLib"
